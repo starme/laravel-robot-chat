@@ -1,0 +1,29 @@
+{
+    "name": "star/laravel-robot-chat",
+    "description": "Sent message to bot-chat in laravel",
+    "type": "library",
+    "require": {
+        "php": "^7.3",
+        "guzzlehttp/guzzle": "^7.1@dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "star",
+            "email": "zj_ng@126.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "provider": [
+                "Star\\Laravel\\Robot\\RobotServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Robot\\": "src/"
+        }
+    }
+}
