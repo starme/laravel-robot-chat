@@ -1,6 +1,6 @@
 <?php
 
-namespace Star\Laravel\Robot;
+namespace Starme\Laravel\Robot;
 
 
 use Illuminate\Support\ServiceProvider;

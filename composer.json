@@ -1,5 +1,5 @@
 {
-    "name": "star/laravel-robot-chat",
+    "name": "starme/laravel-robot-chat",
     "description": "Sent message to bot-chat in laravel",
     "type": "library",
     "require": {
@@ -17,7 +17,7 @@
     "extra": {
         "laravel": {
             "provider": [
-                "Star\\Laravel\\Robot\\RobotServiceProvider"
+                "Starme\\Laravel\\Robot\\RobotServiceProvider"
             ]
         }
     },

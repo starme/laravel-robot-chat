@@ -1,6 +1,6 @@
 <?php
 
-namespace Star\Laravel\Robot;
+namespace Starme\Laravel\Robot;
 
 
 use BadMethodCallException;
@@ -10,7 +10,7 @@ use Illuminate\Events\Dispatcher;
 use Illuminate\Contracts\Pipeline\Pipeline;
 use Illuminate\Support\Traits\Macroable;
 use InvalidArgumentException;
-use Star\Laravel\Robot\Drivers\DriverInterface;
+use Starme\Laravel\Robot\Drivers\DriverInterface;
 
 class Robot
 {

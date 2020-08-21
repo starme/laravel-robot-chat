@@ -1,5 +1,5 @@
 <?php
-namespace Star\Laravel\Robot\Drivers;
+namespace Starme\Laravel\Robot\Drivers;
 
 interface DriverInterface
 {
