@@ -11,7 +11,7 @@ return [
     |
     */
     'rate_cache_key' => 'robot',
-    'rate_allow' => [2, 1],
+    'rate_allow' => [20, 60],
 
     'connections' => [
 
