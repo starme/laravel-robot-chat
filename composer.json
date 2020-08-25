@@ -20,12 +20,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Laravel\\Robot\\": "src/"
+            "Starme\\Laravel\\Robot\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Laravel\\Robot\\Tests\\": "tests/"
+            "Starme\\Laravel\\Robot\\Tests\\": "tests/"
         }
     },
     "extra": {
