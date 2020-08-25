@@ -1,5 +1,5 @@
 <?php
-namespace Starme\Laravel\Robot;
+namespace Starme\Robot;
 
 
 use Illuminate\Support\Manager;

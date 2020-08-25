@@ -1,5 +1,5 @@
 <?php
-namespace Starme\Laravel\Robot\Middleware;
+namespace Starme\Robot\Middleware;
 
 class RateLimited
 {

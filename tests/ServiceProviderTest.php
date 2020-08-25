@@ -1,9 +1,9 @@
 <?php
-namespace Laravel\Robot\Tests;
+namespace Starme\Robot\Tests;
 
 
-use Starme\Laravel\Robot\Drivers\DingTalk;
-use Starme\Laravel\Robot\RobotManager;
+use Starme\Robot\Drivers\DingTalk;
+use Starme\Robot\RobotManager;
 use Tests\TestCase;
 
 class ServiceProviderTest extends TestCase

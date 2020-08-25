@@ -1,5 +1,5 @@
 <?php
-namespace Starme\Laravel\Robot\Events;
+namespace Starme\Robot\Events;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;

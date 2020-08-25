@@ -1,7 +1,7 @@
 <?php
-namespace Starme\Laravel\Robot\Drivers;
+namespace Starme\Robot\Drivers;
 
-use Starme\Laravel\Robot\DriverInterface;
+use Starme\Robot\DriverInterface;
 
 class DingTalk implements DriverInterface
 {

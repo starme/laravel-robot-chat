@@ -1,6 +1,6 @@
 <?php
 
-namespace Starme\Laravel\Robot;
+namespace Starme\Robot;
 
 
 use BadMethodCallException;
