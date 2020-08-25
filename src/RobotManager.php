@@ -3,6 +3,7 @@ namespace Starme\Laravel\Robot;
 
 
 use Illuminate\Support\Manager;
+use Illuminate\Support\Traits\Macroable;
 use InvalidArgumentException;
 
 class RobotManager extends Manager
@@ -49,7 +50,7 @@ class RobotManager extends Manager
 
     protected function make($driver)
     {
-        return $this->container->make(Robot::class)->setDriver($driver);
+        return $this->container->make(ChatRobot::class)->setDriver($driver);
     }
 
     /**
@@ -69,7 +70,7 @@ class RobotManager extends Manager
         }
 
         if (isset($this->customCreators[$config['driver']])) {
-            return $this->callCustomCreator($config['driver']);
+            return $this->callCustomCreator($config);
         }
 
         $driverMethod = 'create'.ucfirst($config['driver']).'Driver';
@@ -82,12 +83,23 @@ class RobotManager extends Manager
     }
 
     /**
-     * Create dingtalk driver for config.
+     * Call a custom driver creator.
+     *
+     * @param array $config
+     * @return mixed
+     */
+    protected function callCustomCreator($config)
+    {
+        return $this->customCreators[$config['driver']]($this->container, $config);
+    }
+
+    /**
+     * Create chat driver for config.
      *
      * @param $config
      * @return Drivers\DingTalk
      */
-    protected function createDingDriver($config)
+    protected function createDingTalkDriver($config)
     {
         return new Drivers\DingTalk($config);
     }

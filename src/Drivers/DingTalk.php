@@ -1,8 +1,11 @@
 <?php
 namespace Starme\Laravel\Robot\Drivers;
 
+use Starme\Laravel\Robot\DriverInterface;
+
 class DingTalk implements DriverInterface
 {
+
     protected $config;
 
     /**
@@ -13,8 +16,6 @@ class DingTalk implements DriverInterface
     {
         $this->config = $config;
     }
-
-
 
     public function getUrl()
     {

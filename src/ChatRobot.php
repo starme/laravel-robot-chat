@@ -4,22 +4,17 @@ namespace Starme\Laravel\Robot;
 
 
 use BadMethodCallException;
-use Facade\FlareClient\Http\Exceptions\InvalidData;
 use GuzzleHttp\Client;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Contracts\Pipeline\Pipeline;
 use Illuminate\Support\Traits\Macroable;
 use InvalidArgumentException;
-use Starme\Laravel\Robot\Drivers\DriverInterface;
 
-class Robot
+class ChatRobot
 {
-    use Macroable {
-        Macroable::__call as macroCall;
-    }
 
     /**
-     * @var Drivers\DriverInterface
+     * @var DriverInterface
      */
     protected $driver;
 

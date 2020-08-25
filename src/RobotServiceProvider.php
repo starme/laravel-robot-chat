@@ -3,6 +3,8 @@
 namespace Starme\Laravel\Robot;
 
 
+use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\ServiceProvider;
 
 class RobotServiceProvider extends ServiceProvider
@@ -16,7 +18,7 @@ class RobotServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/config/robots.php' => config_path('robots.php'),
-        ]);
+        ], 'robot-config');
     }
 
     /**
@@ -26,7 +28,15 @@ class RobotServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('robot', function ($app) {
+        $this->app->bind(ChatRobot::class, function($app) {
+            return new ChatRobot(
+                $app->make(Dispatcher::class),
+                $app->make(Pipeline::class),
+                $app['config']['robots']
+            );
+        });
+
+        $this->app->bind('robot.chat', function ($app) {
             return new RobotManager($app);
         });
     }

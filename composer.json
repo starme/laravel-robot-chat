@@ -2,19 +2,32 @@
     "name": "starme/laravel-robot-chat",
     "description": "Sent message to bot-chat in laravel",
     "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Star.Me",
+            "email": "zj_ng@126.com"
+        }
+    ],
     "require": {
         "php": "^7.2.5",
         "guzzlehttp/guzzle": "^6.3",
         "predis/predis": "^1.1"
     },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "star",
-            "email": "zj_ng@126.com"
+    "require-dev": {
+        "laravel/framework": "^7.0",
+        "phpunit/phpunit": "^6.0|^7.0|^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laravel\\Robot\\": "src/"
         }
-    ],
-    "minimum-stability": "dev",
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Laravel\\Robot\\Tests\\": "tests/"
+        }
+    },
     "extra": {
         "laravel": {
             "provider": [
@@ -22,9 +35,6 @@
             ]
         }
     },
-    "autoload": {
-        "psr-4": {
-            "Robot\\": "src/"
-        }
-    }
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
