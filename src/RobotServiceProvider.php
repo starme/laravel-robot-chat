@@ -36,7 +36,7 @@ class RobotServiceProvider extends ServiceProvider
             );
         });
 
-        $this->app->bind('robot.chat', function ($app) {
+        $this->app->singleton('robot.chat', function ($app) {
             return new RobotManager($app);
         });
     }
