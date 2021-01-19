@@ -1,7 +1,7 @@
 <?php
-namespace Star\Laravel\Robot\Drivers;
+namespace Starme\Robot\Drivers;
 
-use Star\Laravel\Robot\DriverInterface;
+use Starme\Robot\DriverInterface;
 
 class Yach implements DriverInterface
 {

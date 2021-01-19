@@ -4,6 +4,8 @@ return [
 
     'default' => env('ROBOT_DEFAULT', 'default'),
 
+    'level' => env('ROBOT_LEVEL', 200),
+
     /*
     |--------------------------------------------------------------------------
     | Robot limit allow send message.

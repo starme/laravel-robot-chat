@@ -2,7 +2,6 @@
 
 namespace Starme\Robot;
 
-
 use BadMethodCallException;
 use GuzzleHttp\Client;
 use Illuminate\Events\Dispatcher;
@@ -12,7 +11,6 @@ use InvalidArgumentException;
 
 class ChatRobot
 {
-
     /**
      * @var DriverInterface
      */
@@ -36,10 +34,12 @@ class ChatRobot
     protected $middleware = [
         Middleware\RateLimited::class,
     ];
+
     /**
      * @var Pipeline
      */
     protected $pipe;
+
 
     public function __construct(Dispatcher $events, Pipeline $pipe, $config)
     {
@@ -60,51 +60,72 @@ class ChatRobot
         return $this;
     }
 
-    public function send($type, $data)
-    {
-        $data = $this->$type($data);
+//    public function send($type, $data)
+//    {
+//        $data = $this->$type($data);
+//
+//        if ( ! $data) {
+//            throw new InvalidArgumentException(sprintf(
+//                'Missing parameter data for [%s].', static::class
+//            ));
+//        }
+//        return $this->request($data);
+//    }
 
-        if ( ! $data) {
-            throw new InvalidArgumentException(sprintf(
-                'Missing parameter data for [%s].', static::class
-            ));
-        }
-        return $this->request($data);
+    public function info($type, $title, $content, $at=[])
+    {
+        return $this->request(
+            $this->$type(Levels::INFO, $title, $content, $at)
+        );
+    }
+
+    public function warning($type, $title, $content, $at=[])
+    {
+        return $this->request(
+            $this->$type(Levels::WARNING, $title, $content, $at)
+        );
+    }
+
+    public function error($type, $title, $content, $at=[])
+    {
+        return $this->request(
+            $this->$type(Levels::ERROR, $title, $content, $at)
+        );
     }
 
     /**
      * @param array $data
      * @return array
      */
-    public function markdown(array $data) : array
+    protected function markdown($level, $title, $content, $at) : array
     {
-        if( ! isset($data['content'])) {
-            return [];
-        }
-
         return [
+            'level' => $level,
             'msgtype' => 'markdown',
             'markdown' => [
-                'title' => $data['title'] ?? '',
-                'text' => $data['content'],
+                'title' => $title,
+                'text' => $this->makeContent($level, $content),
             ],
-            'at' => $data['at'] ?? []
+            'at' => $at
         ];
     }
 
-    public function text(array $data) : array
+    protected function text($level, $title, $content, $at) : array
     {
-        if( ! isset($data['content'])) {
-            return [];
-        }
-
         return [
-            'msgtype' => 'text',
-            'text' => [
-                'content' => $data['content'],
+            'level' => $level,
+            'msgtype' => 'markdown',
+            'markdown' => [
+                'title' => $title,
+                'text' => $this->makeContent($level, $content),
             ],
-            'at' => $data['at'] ?? []
+            'at' => $at
         ];
+    }
+
+    protected function makeContent($level, $content)
+    {
+        return sprintf("* Message \n> environment：%s\n> Level：%s\n%s", app()->environment(), Levels::getLevel($level), $content);
     }
 
     /**
@@ -116,13 +137,18 @@ class ChatRobot
         return $this->middleware()->then(function() use ($data) {
             $this->client = $this->client ?? $this->client();
             $url = $this->driver->getUrl();
+            if($this->config['level'] > $data['level']) {
+                return false;
+            }
             if ( ! $this->shouldSendRequest($url, $data)) {
                 return false;
             }
             $response = $this->client->request('POST', $url, ['json' => $data]);
-
-            $result = json_decode($response->getBody()->getContents(), true);
-
+            try {
+                $result = json_decode($response->getBody()->getContents(), true);
+            } catch (\Exception $e) {
+                $result = $e->getMessage();
+            }
             $this->events->dispatch(
                 new Events\RobotSent($url, $data, $result)
             );
