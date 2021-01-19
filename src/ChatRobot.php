@@ -60,17 +60,17 @@ class ChatRobot
         return $this;
     }
 
-//    public function send($type, $data)
-//    {
-//        $data = $this->$type($data);
-//
-//        if ( ! $data) {
-//            throw new InvalidArgumentException(sprintf(
-//                'Missing parameter data for [%s].', static::class
-//            ));
-//        }
-//        return $this->request($data);
-//    }
+    public function send($type, $title, $content, $level='info', $at=[])
+    {
+        $data = $this->$type($level, $title, $content, $at);
+
+        if ( ! $data) {
+            throw new InvalidArgumentException(sprintf(
+                'Missing parameter data for [%s].', static::class
+            ));
+        }
+        return $this->request($data);
+    }
 
     public function info($type, $title, $content, $at=[])
     {
